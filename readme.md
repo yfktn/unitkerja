@@ -8,6 +8,8 @@ untuk tulisan pun bisa dipisah recordnya.
 Plugin ini dikembangkan karena kebutuhan tersebut, akibat plugin yang ada sebelumnya terlalu
 rumit untuk digunakan.
 
+Adapun plugin Tulisan ada di https://gitlab.com/yfktn/tulisan.
+
 ## Tentang Hak Akses
 
 Saat ini user yang masuk dalam unit induk, tidak otomatis bisa mengakses ke unit yang menjadi
