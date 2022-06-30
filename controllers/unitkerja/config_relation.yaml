@@ -1,0 +1,8 @@
+operator:
+  label: Menambahkan operator unit
+  view:
+      list: $/yfktn/unitkerja/models/operatorunitkerja/columns.yaml
+      toolbarButtons: create|delete
+  manage:
+      form: $/yfktn/unitkerja/models/operatorunitkerja/fields.yaml
+      recordsPerPage: 10

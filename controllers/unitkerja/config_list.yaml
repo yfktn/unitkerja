@@ -1,0 +1,16 @@
+title: UnitKerja
+modelClass: Yfktn\UnitKerja\Models\UnitKerja
+list: $/yfktn/unitkerja/models/unitkerja/columns.yaml
+recordUrl: 'yfktn/unitkerja/unitkerja/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+structure:
+    showTree: true
+    showReorder: true
+    maxDepth: 2

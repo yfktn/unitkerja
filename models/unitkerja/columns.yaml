@@ -1,0 +1,19 @@
+columns:
+    nama:
+        label: Unit Kerja
+        type: text
+    keterangan:
+        label: Keterangan
+        type: text
+    slug:
+        label: slug
+        type: text
+        invisible: true
+    created_at:
+        label: created_at
+        type: datetime
+        invisible: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        invisible: true

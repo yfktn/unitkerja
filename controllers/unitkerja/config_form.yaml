@@ -1,0 +1,10 @@
+name: UnitKerja
+form: $/yfktn/unitkerja/models/unitkerja/fields.yaml
+modelClass: Yfktn\UnitKerja\Models\UnitKerja
+defaultRedirect: yfktn/unitkerja/unitkerja
+create:
+    redirect: 'yfktn/unitkerja/unitkerja/update/:id'
+    redirectClose: yfktn/unitkerja/unitkerja
+update:
+    redirect: yfktn/unitkerja/unitkerja
+    redirectClose: yfktn/unitkerja/unitkerja

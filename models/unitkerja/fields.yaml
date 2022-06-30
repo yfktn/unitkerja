@@ -1,0 +1,31 @@
+fields:
+    nama:
+        label: 'Nama Unit'
+        span: auto
+        required: true
+        type: text
+        comment: 'Masukkan nama unit kerja.'
+    slug:
+        label: 'Slug'
+        span: auto
+        required: true
+        type: text
+        preset:
+            field: nama
+            type: slug
+        comment: 'Silahkan edit bila dibutuhkan.'
+tabs:
+    strecth: true
+    fields:
+        operator:
+            label: Atur Operator Unit Kerja
+            type: partial
+            path: $/yfktn/unitkerja/controllers/unitkerja/_render_operator.htm
+            tab: Operator
+        keterangan:
+            label: Keterangan
+            size: small
+            span: full
+            type: textarea
+            comment: 'Ketikkan keterangan jika dibutuhkan.'
+            tab: Keterangan

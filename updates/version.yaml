@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table yfktn_unitkerja_'
+    - builder_table_create_yfktn_unitkerja.php
+1.0.3:
+    - 'Tambahkan catatan unit di table tulisan!'
+    - migration_103.php
+1.0.4:
+    - 'Hubungkan Unit Kerja & User, Created table yfktn_unitkerja_operator'
+    - builder_table_create_yfktn_unitkerja_operator.php

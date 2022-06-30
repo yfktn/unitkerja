@@ -1,0 +1,9 @@
+fields:
+    # unit_kerja_id:
+    #     label: 'Unit Kerja'
+    #     span: auto
+    #     type: relation
+    user:
+        label: Pilih Operator Unit Terpilih
+        span: full
+        type: dropdown

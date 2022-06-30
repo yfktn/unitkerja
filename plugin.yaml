@@ -1,0 +1,20 @@
+plugin:
+    name: 'yfktn.unitkerja::lang.plugin.name'
+    description: 'yfktn.unitkerja::lang.plugin.description'
+    author: Yfktn
+    icon: oc-icon-building-o
+    homepage: ''
+permissions:
+    yfktn.unitkerja.manajemen:
+        tab: 'Unit Kerja'
+        label: 'Manajemen Unit Kerja'
+    yfktn.unitkerja.akses_unit_lain:
+        tab: 'Unit Kerja'
+        label: 'User bisa mengakses unit kerja lain'
+navigation:
+    main-menu-unitkerja:
+        label: 'Unit Kerja'
+        url: yfktn/unitkerja/unitkerja
+        icon: icon-tree
+        permissions:
+            - yfktn.unitkerja.manajemen
