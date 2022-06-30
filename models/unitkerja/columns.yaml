@@ -4,7 +4,9 @@ columns:
         type: text
     keterangan:
         label: Keterangan
-        type: text
+        type: partial
+        path: $/yfktn/unitkerja/models/unitkerja/_render_keterangan.htm
+        invisible: true
     slug:
         label: slug
         type: text
