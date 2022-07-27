@@ -35,6 +35,12 @@ class UnitKerja extends Model
         ]
     ];
 
+    /**
+     * Lakukan load terhadap pilihan unit kerja yang user ini diasosiasikan padanya.
+     * @param mixed $model 
+     * @param mixed $formField 
+     * @return mixed 
+     */
     public static function loadPilihanUnitKerja($model, $formField)
     {
         $currentLoggedUser = BackendAuth::getUser();
@@ -61,7 +67,7 @@ class UnitKerja extends Model
                 $query->where('user_id', '=', $currentLoggedUser->id);
             });
         }
-        trace_log($model->unit_kerja_id);
+        
         if($model !== null && !empty($model->unit_kerja_id)) {
             $unitKerjaQuery = $unitKerjaQuery->orWhere('id', $model->unit_kerja_id);
         }

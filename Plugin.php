@@ -15,6 +15,9 @@ class Plugin extends PluginBase
 
     public function registerComponents()
     {
+        return [
+            'Yfktn\UnitKerja\Components\HalamanUnitTulisan' => 'halamanUnitTulisan',
+        ];
     }
 
     public function registerSettings()
@@ -54,6 +57,7 @@ class Plugin extends PluginBase
             ]);
         });
 
+        // pastikan bahwa yang muncul di list sesuai dengan unit kerja bersangkutan.
         Event::listen('backend.list.extendQuery', function($widget, $query) {
             if( $widget->model instanceof TulisanModel ) {
                 // cari tulisan dari user dengan unit kerja yang sama dengan user

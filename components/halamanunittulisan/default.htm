@@ -1,0 +1,7 @@
+{% set dataHalamanUnit = __SELF__.dataHalamanUnit %}
+<h3>{{ dataHalamanUnit['data'].nama }}</h3>
+{{ html_clean(dataHalamanUnit['data'].keterangan)|raw }}
+<h4>Tulisan Unit</h4>
+{% for tertulis in dataHalamanUnit['tulisan'] %}
+    <li>{{ tertulis.judul }}</li>
+{% endfor %}
