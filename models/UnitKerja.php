@@ -67,10 +67,11 @@ class UnitKerja extends Model
                 $query->where('user_id', '=', $currentLoggedUser->id);
             });
         }
-        
+        trace_log("batasi unit kerja?", $batasiUnitKerja==true?"TRUE":"NO");
         if($model !== null && !empty($model->unit_kerja_id)) {
             $unitKerjaQuery = $unitKerjaQuery->orWhere('id', $model->unit_kerja_id);
         }
+	trace_log($unitKerjaQuery->toSql());
         return $unitKerjaQuery->lists('nama', 'id');
     }
 }
