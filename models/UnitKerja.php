@@ -36,7 +36,8 @@ class UnitKerja extends Model
     ];
 
     /**
-     * Lakukan load terhadap pilihan unit kerja yang user ini diasosiasikan padanya.
+     * Lakukan load terhadap pilihan unit kerja yang user ini diasosiasikan padanya. Loading
+     * ini dilakukan pada form dropdown pada waktu melakukan operasi CRUD di form Tulisan.
      * @param mixed $model 
      * @param mixed $formField 
      * @return mixed 
@@ -67,11 +68,14 @@ class UnitKerja extends Model
                 $query->where('user_id', '=', $currentLoggedUser->id);
             });
         }
-        trace_log("batasi unit kerja?", $batasiUnitKerja==true?"TRUE":"NO");
-        if($model !== null && !empty($model->unit_kerja_id)) {
+        // $model masuk ke sini pasti tidak null! satu-satunya cara adalah check pada unit kerjanya
+        // bila user ini dipindahtugaskan, maka kemungkinan unit kerja akan berubah. Untuk itu,
+        // lakukan pengecekan lagi pada unit kerja miliknya, dan tambahkan unit kerja sebelumnya di mana
+        // user ini menjadi anggotanya. Karena bug maka pastikan yang diperiksa hanyalah yang telah 
+        // mendapatkan pembatasan terhadap Unit Kerja nya!
+        if(empty($model->unit_kerja_id) === false && $batasiUnitKerja) { 
             $unitKerjaQuery = $unitKerjaQuery->orWhere('id', $model->unit_kerja_id);
         }
-	trace_log($unitKerjaQuery->toSql());
         return $unitKerjaQuery->lists('nama', 'id');
     }
 }
