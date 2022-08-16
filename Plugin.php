@@ -6,6 +6,7 @@ use Event;
 use System\Classes\PluginBase;
 use Yfktn\Tulisan\Controllers\Tulisan as TulisanController;
 use Yfktn\Tulisan\Models\Tulisan as TulisanModel;
+use Yfktn\UnitKerja\Classes\UserAndUnitUtil;
 use Yfktn\UnitKerja\Models\UnitKerja;
 
 class Plugin extends PluginBase
@@ -51,8 +52,9 @@ class Plugin extends PluginBase
                 'unit_kerja_id' => [
                     'type'    => 'dropdown',
                     'label'   => 'Unit Kerja',
-                    'comment' => 'Pilih unit kerja tulisan ini.',
-                    'options' => 'Yfktn\UnitKerja\Models\UnitKerja::loadPilihanUnitKerja'
+                    'comment' => 'Pilih unit kerja asal tulisan ini.',
+                    'emptyOption' => 'Unit Kerja tidak dipilih',
+                    'options' => 'Yfktn\UnitKerja\Classes\UserAndUnitUtil::loadPilihanUnitKerjaSampaiSubUnitnya'
                 ],
             ]);
         });
@@ -73,9 +75,9 @@ class Plugin extends PluginBase
                     } else {
                         // dapatkan daftar posting yang dibuat pada unit yang user ini adalah operatornya
                         // Tulisan (unit_kerja_id) -> UnitKerja (id) -> OperatorUnitKerja (unit_kerja_id) (user_id) -> BackendUserModel (id)
-                        $query->whereHas('unit_kerja.operator', function($query) use($currentLoggedUser) {
-                            $query->where('user_id', $currentLoggedUser->id);
-                        });
+                        $query->whereIn('unit_kerja_id', array_map(function($item) {
+                            return $item->id;
+                        }, UserAndUnitUtil::getUnitOfUser($currentLoggedUser->id)));
                     }
                 }
             }

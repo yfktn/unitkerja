@@ -2,6 +2,11 @@ columns:
     nama:
         label: Unit Kerja
         type: text
+    operator:
+        label: Operator Unit
+        type: partial
+        path: $/yfktn/unitkerja/models/unitkerja/_render_operator.htm
+        invisible: false;
     keterangan:
         label: Keterangan
         type: partial

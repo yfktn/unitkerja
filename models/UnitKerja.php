@@ -1,9 +1,12 @@
 <?php namespace Yfktn\UnitKerja\Models;
 
 use BackendAuth;
+use Illuminate\Support\Facades\DB;
 use Model;
 use October\Rain\Database\Traits\NestedTree;
 use October\Rain\Database\Traits\Sluggable;
+use Yfktn\UnitKerja\Classes\TraitGetUnitOfUser;
+use Yfktn\UnitKerja\Classes\UserAndUnitUtil;
 
 /**
  * Model

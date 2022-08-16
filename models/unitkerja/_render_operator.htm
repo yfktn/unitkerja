@@ -1,0 +1,6 @@
+<?php
+$ops = $record->operator;
+foreach($ops as $op): ?>
+    <?php $usernya = $op->user ?>
+    <i class="icon-user"></i> <?= implode(" ", [$usernya->first_name, $usernya->last_name]) . " ({$usernya->login})" ?>
+<?php endforeach ?>

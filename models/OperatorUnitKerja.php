@@ -4,6 +4,7 @@ use Backend\Models\User;
 use Db;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Model;
+use Yfktn\UnitKerja\Classes\UserAndUnitUtil;
 
 /**
  * Model
@@ -37,6 +38,11 @@ class OperatorUnitKerja extends Model
         ]
     ];
 
+    public function afterSave()
+    {
+        UserAndUnitUtil::forgetCacheUnitOfUser($this->user_id);
+    }
+
     /**
      * Tampilkan user yang bisa dipilih, untuk ini jangan tampilkan lagi yang sudah
      * ditambahkan sebelumnya.
@@ -48,12 +54,21 @@ class OperatorUnitKerja extends Model
     public function getUserOptions($fieldName, $value)
     {
         $currentId = request()->segment(6);
-        return User::selectRaw("concat(first_name, ' ', last_name) as opname, id")
+        $dU = User::selectRaw("first_name, last_name, login, is_superuser, id")
             ->whereNotIn('id', function($query) use($currentId) {
                 $query->from('yfktn_unitkerja_operator')
                     ->selectRaw('user_id')
                     ->where('unit_kerja_id', $currentId);
             })
-            ->pluck('opname', 'id');
+            ->get();
+        $ret = [];
+        foreach($dU as $d) {
+            if($d->isSuperUser()) {
+                continue;
+            }
+            $nm = implode(" ", [$d->first_name, $d->last_name]) . " ({$d->login})";
+            $ret[$d->id] = $nm;
+        }
+        return $ret;
     }
 }

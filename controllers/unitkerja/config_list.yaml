@@ -1,4 +1,4 @@
-title: UnitKerja
+title: Unit Kerja
 modelClass: Yfktn\UnitKerja\Models\UnitKerja
 list: $/yfktn/unitkerja/models/unitkerja/columns.yaml
 recordUrl: 'yfktn/unitkerja/unitkerja/update/:id'

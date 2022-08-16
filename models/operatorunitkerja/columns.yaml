@@ -3,10 +3,12 @@ columns:
     #     label: unit_kerja_id
     #     type: number
     #     searchable: true
-    usernya:
+    user_id:
         label: Operator Unit
-        relation: user
-        select: concat(first_name, ' ', last_name)
+        type: partial
+        path: $/yfktn/unitkerja/models/operatorunitkerja/_render_op.htm
+        # relation: user
+        # select: concat(first_name, ' ', last_name)
         searchable: true
     created_at:
         label: created_at
