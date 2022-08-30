@@ -17,9 +17,8 @@ class UserAndUnitUtil
     public static function getUnitOfUser($user_id)
     {
         return Cache::rememberForever("unitofuser{$user_id}", function() use($user_id) {
-
             $sql = <<<SQL
-            select u.nama, u.id from 
+            select u.nama, u.id, u.nest_depth from 
             (
               select u.id, u.nest_left, u.nest_right
               from yfktn_unitkerja_ u
@@ -73,10 +72,17 @@ class UserAndUnitUtil
         $hasilQuery = [];
         if($batasiUnitKerja) {
             $hasilQuery = self::getUnitOfUser($currentLoggedUser->id);
+        } else {
+            $hasilQuery = \Yfktn\UnitKerja\Models\UnitKerja::orderBy('nest_left', 'asc')
+                ->get(['nama', 'id', 'nest_depth']);
         }
         $hasil = [];
         foreach($hasilQuery as $q) {
-            $hasil[$q->id] = $q->nama;
+            $c = "";
+            if((int)$q->nest_depth > 0) {
+                $c = str_repeat("-", ((int)$q->nest_depth * 2)) . "&gt; ";
+            }
+            $hasil[$q->id] = $c . $q->nama;
         }
         return $hasil;
     }

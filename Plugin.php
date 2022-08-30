@@ -54,9 +54,17 @@ class Plugin extends PluginBase
                     'label'   => 'Unit Kerja',
                     'comment' => 'Pilih unit kerja asal tulisan ini.',
                     'emptyOption' => 'Unit Kerja tidak dipilih',
+                    'default' => null,
                     'options' => 'Yfktn\UnitKerja\Classes\UserAndUnitUtil::loadPilihanUnitKerjaSampaiSubUnitnya'
                 ],
             ]);
+
+            $model->bindEvent('model.beforeSave', function() use ($model) {
+                if(empty($model->attributes['unit_kerja_id'])) {
+                    // kalau tidak dipilih masukkan jadi null saja!
+                    $model->attributes['unit_kerja_id'] = null;
+                }
+            });
         });
 
         // pastikan bahwa yang muncul di list sesuai dengan unit kerja bersangkutan.
