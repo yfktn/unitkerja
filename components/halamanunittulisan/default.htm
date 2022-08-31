@@ -2,6 +2,34 @@
 <h3>{{ dataHalamanUnit['data'].nama }}</h3>
 {{ html_clean(dataHalamanUnit['data'].keterangan)|raw }}
 <h4>Tulisan Unit</h4>
+<ul>
 {% for tertulis in dataHalamanUnit['tulisan'] %}
     <li>{{ tertulis.judul }}</li>
 {% endfor %}
+</ul>
+
+
+
+{% if dataHalamanUnit['tulisan'].lastPage > 1 %}
+    {% set paramHalaman = dataHalamanUnit['paramHalaman'] %}
+    <ul class="pagination">
+        {% if dataHalamanUnit['tulisan'].currentPage > 1 %}
+        <li class="page-item"><a class="page-link"
+            href="{{ this.page.baseFileName|page({ (paramHalaman): (dataHalamanUnit['tulisan'].currentPage-1) }) }}">
+            <i class="ion-ios-arrow-thin-left"></i></a></li>
+        {% endif %}
+
+        {% for page in 1..dataHalamanUnit['tulisan'].lastPage %}
+        <li class="page-item {{ dataHalamanUnit['tulisan'].currentPage == page ? 'active' : null }}">
+            <a class="page-link" 
+            href="{{ this.page.baseFileName|page({(paramHalaman): page }) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+
+        {% if dataHalamanUnit['tulisan'].lastPage > dataHalamanUnit['tulisan'].currentPage %}
+        <li class="page-item">
+            <a class="page-link" href="{{ this.page.baseFileName|page({(paramHalaman): (dataHalamanUnit['tulisan'].currentPage+1) }) }}">
+                    <i class="ion-ios-arrow-thin-right"></i></a></li>
+        {% endif %}
+    </ul>
+{% endif %}
