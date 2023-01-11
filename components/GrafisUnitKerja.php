@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
  */
 class GrafisUnitKerja extends ComponentBase
 {
+    public $grafisUnitKerja = [];
+
     public function componentDetails()
     {
         return [
@@ -24,11 +26,12 @@ class GrafisUnitKerja extends ComponentBase
     public function onRun()
     {
         $sql = <<<SQL
-SELECT uk.nama, count(*) as jumlah_posting FROM yfktn_unitkerja_ uk 
-INNER JOIN yfktn_tulisan_tulis t on t.unit_kerja_id = uk.id
-GROUP BY t.unit_kerja_id, uk.nama
+SELECT uk.id, uk.slug, uk.nama, count(t.unit_kerja_id) as jumlah_posting FROM yfktn_unitkerja_ uk
+LEFT JOIN yfktn_tulisan_tulis t on t.unit_kerja_id = uk.id
+GROUP BY uk.id, uk.slug, uk.nama
 SQL;
-        $record = DB::select($sql);
-        
+        $this->grafisUnitKerja['record'] = DB::select($sql);
+        $this->grafisUnitKerja['total_posting'] = array_sum(array_column($this->grafisUnitKerja['record'], 'jumlah_posting'));
+
     }
 }

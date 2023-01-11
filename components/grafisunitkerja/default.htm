@@ -1,3 +1,30 @@
-<p>This is the default markup for component GrafisUnitKerja</p>
+{% set grafisUnitKerja = __SELF__.grafisUnitKerja %}
 
-<small>You can delete this file if you want</small>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nama Unit</th>
+            <th>Jumlah Publikasi</th>
+            <th>Prosentase</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for grafisData in grafisUnitKerja['record'] %}
+            <tr>
+                <td>{{ grafisData.nama }}</td>
+                <td>{{ grafisData.jumlah_posting }}</td>
+                {% set prosen = grafisData.jumlah_posting / grafisUnitKerja['total_posting'] * 100 %}
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" 
+                            role="progressbar" style="width: {{ prosen }}%" 
+                            aria-valuenow="{{ prosen }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ prosen|number_format(2, ".", ",") }} %
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

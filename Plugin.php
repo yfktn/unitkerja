@@ -18,6 +18,7 @@ class Plugin extends PluginBase
     {
         return [
             'Yfktn\UnitKerja\Components\HalamanUnitTulisan' => 'halamanUnitTulisan',
+            'Yfktn\UnitKerja\Components\GrafisUnitKerja' => 'grafisUnitKerja',
         ];
     }
 
